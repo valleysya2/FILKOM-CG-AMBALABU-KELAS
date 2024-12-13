@@ -1,0 +1,3 @@
+﻿  Demo.cpp
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Lesson02.vcxproj -> C:\Users\eriqa\Downloads\Grafika Komputer dan Visualisasi\vs\Debug\Lesson02.exe
