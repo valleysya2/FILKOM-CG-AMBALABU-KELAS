@@ -24,59 +24,74 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 ///
-/// @ref gtx_common
-/// @file glm/gtx/common.hpp
-/// @date 2014-09-08 / 2014-09-08
+/// @ref gtx_color_space
+/// @file glm/gtx/color_space.hpp
+/// @date 2005-12-21 / 2011-06-07
 /// @author Christophe Riccio
 ///
 /// @see core (dependence)
-/// @see gtc_half_float (dependence)
 ///
-/// @defgroup gtx_common GLM_GTX_common
+/// @defgroup gtx_color_space GLM_GTX_color_space
 /// @ingroup gtx
 /// 
-/// @brief Provide functions to increase the compatibility with Cg and HLSL languages
+/// @brief Related to RGB to HSV conversions and operations.
 /// 
-/// <glm/gtx/common.hpp> need to be included to use these functionalities.
+/// <glm/gtx/color_space.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-// Dependencies:
-#include "../vec2.hpp"
-#include "../vec3.hpp"
-#include "../vec4.hpp"
-#include "../gtc/vec1.hpp"
+// Dependency:
+#include "../glm.hpp"
 
 #if(defined(GLM_MESSAGES) && !defined(GLM_EXT_INCLUDED))
-#	pragma message("GLM: GLM_GTX_common extension included")
+#	pragma message("GLM: GLM_GTX_color_space extension included")
 #endif
 
 namespace glm
 {
-	/// @addtogroup gtx_common
+	/// @addtogroup gtx_color_space
 	/// @{
 
-	/// Returns true if x is a denormalized number
-	/// Numbers whose absolute value is too small to be represented in the normal format are represented in an alternate, denormalized format.
-	/// This format is less precise but can represent values closer to zero.
-	/// 
-	/// @tparam genType Floating-point scalar or vector types.
-	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/isnan.xml">GLSL isnan man page</a>
-	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 8.3 Common Functions</a>
-	template <typename genType> 
-	GLM_FUNC_DECL typename genType::bool_type isdenormal(genType const & x);
+	/// Converts a color from HSV color space to its color in RGB color space.
+	/// @see gtx_color_space
+	template <typename T, precision P>
+	GLM_FUNC_DECL tvec3<T, P> rgbColor(
+		tvec3<T, P> const & hsvValue);
 
-	/// Similiar to 'mod' but with a different rounding and integer support.
-	/// Returns 'x - y * trunc(x/y)' instead of 'x - y * floor(x/y)'
-	/// 
-	/// @see <a href="http://stackoverflow.com/questions/7610631/glsl-mod-vs-hlsl-fmod">GLSL mod vs HLSL fmod</a>
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/mod.xml">GLSL mod man page</a>
-	template <typename T, precision P, template <typename, precision> class vecType>
-	GLM_FUNC_DECL vecType<T, P> fmod(vecType<T, P> const & v);
+	/// Converts a color from RGB color space to its color in HSV color space.
+	/// @see gtx_color_space
+	template <typename T, precision P>
+	GLM_FUNC_DECL tvec3<T, P> hsvColor(
+		tvec3<T, P> const & rgbValue);
+		
+	/// Build a saturation matrix.
+	/// @see gtx_color_space
+	template <typename T>
+	GLM_FUNC_DECL tmat4x4<T, defaultp> saturation(
+		T const s);
+
+	/// Modify the saturation of a color.
+	/// @see gtx_color_space
+	template <typename T, precision P>
+	GLM_FUNC_DECL tvec3<T, P> saturation(
+		T const s,
+		tvec3<T, P> const & color);
+		
+	/// Modify the saturation of a color.
+	/// @see gtx_color_space
+	template <typename T, precision P>
+	GLM_FUNC_DECL tvec4<T, P> saturation(
+		T const s,
+		tvec4<T, P> const & color);
+		
+	/// Compute color luminosity associating ratios (0.33, 0.59, 0.11) to RGB canals.
+	/// @see gtx_color_space
+	template <typename T, precision P>
+	GLM_FUNC_DECL T luminosity(
+		tvec3<T, P> const & color);
 
 	/// @}
 }//namespace glm
 
-#include "common.inl"
+#include "color_space.inl"

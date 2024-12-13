@@ -24,78 +24,62 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 ///
-/// @ref gtx_integer
-/// @file glm/gtx/integer.hpp
-/// @date 2005-12-24 / 2011-10-13
+/// @ref gtx_color_space_YCoCg
+/// @file glm/gtx/color_space_YCoCg.hpp
+/// @date 2008-10-28 / 2011-06-07
 /// @author Christophe Riccio
 ///
 /// @see core (dependence)
 ///
-/// @defgroup gtx_integer GLM_GTX_integer
+/// @defgroup gtx_color_space_YCoCg GLM_GTX_color_space_YCoCg
 /// @ingroup gtx
+///
+/// @brief RGB to YCoCg conversions and operations
 /// 
-/// @brief Add support for integer for core functions
-/// 
-/// <glm/gtx/integer.hpp> need to be included to use these functionalities.
+/// <glm/gtx/color_space_YCoCg.hpp> need to be included to use these functionalities.
 ///////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
 // Dependency:
 #include "../glm.hpp"
-#include "../gtc/integer.hpp"
 
 #if(defined(GLM_MESSAGES) && !defined(GLM_EXT_INCLUDED))
-#	pragma message("GLM: GLM_GTX_integer extension included")
+#	pragma message("GLM: GLM_GTX_color_space_YCoCg extension included")
 #endif
 
 namespace glm
 {
-	/// @addtogroup gtx_integer
+	/// @addtogroup gtx_color_space_YCoCg
 	/// @{
 
-	//! Returns x raised to the y power. 
-	//! From GLM_GTX_integer extension.
-	GLM_FUNC_DECL int pow(int x, int y);
+	/// Convert a color from RGB color space to YCoCg color space.
+	/// @see gtx_color_space_YCoCg
+	template <typename T, precision P>
+	GLM_FUNC_DECL tvec3<T, P> rgb2YCoCg(
+		tvec3<T, P> const & rgbColor);
 
-	//! Returns the positive square root of x.
-	//! From GLM_GTX_integer extension.
-	GLM_FUNC_DECL int sqrt(int x);
+	/// Convert a color from YCoCg color space to RGB color space.
+	/// @see gtx_color_space_YCoCg
+	template <typename T, precision P>
+	GLM_FUNC_DECL tvec3<T, P> YCoCg2rgb(
+		tvec3<T, P> const & YCoCgColor);
 
-	//! Returns the floor log2 of x.
-	//! From GLM_GTX_integer extension.
-	GLM_FUNC_DECL unsigned int floor_log2(unsigned int x);
+	/// Convert a color from RGB color space to YCoCgR color space.
+	/// @see "YCoCg-R: A Color Space with RGB Reversibility and Low Dynamic Range"
+	/// @see gtx_color_space_YCoCg
+	template <typename T, precision P>
+	GLM_FUNC_DECL tvec3<T, P> rgb2YCoCgR(
+		tvec3<T, P> const & rgbColor);
 
-	//! Modulus. Returns x - y * floor(x / y) for each component in x using the floating point value y.
-	//! From GLM_GTX_integer extension.
-	GLM_FUNC_DECL int mod(int x, int y);
-
-	//! Return the factorial value of a number (!12 max, integer only)
-	//! From GLM_GTX_integer extension.
-	template <typename genType> 
-	GLM_FUNC_DECL genType factorial(genType const & x);
-
-	//! 32bit signed integer. 
-	//! From GLM_GTX_integer extension.
-	typedef signed int					sint;
-
-	//! Returns x raised to the y power.
-	//! From GLM_GTX_integer extension.
-	GLM_FUNC_DECL uint pow(uint x, uint y);
-
-	//! Returns the positive square root of x. 
-	//! From GLM_GTX_integer extension.
-	GLM_FUNC_DECL uint sqrt(uint x);
-
-	//! Modulus. Returns x - y * floor(x / y) for each component in x using the floating point value y.
-	//! From GLM_GTX_integer extension.
-	GLM_FUNC_DECL uint mod(uint x, uint y);
-
-	//! Returns the number of leading zeros.
-	//! From GLM_GTX_integer extension.
-	GLM_FUNC_DECL uint nlz(uint x);
+	/// Convert a color from YCoCgR color space to RGB color space.
+	/// @see "YCoCg-R: A Color Space with RGB Reversibility and Low Dynamic Range"
+	/// @see gtx_color_space_YCoCg
+	template <typename T, precision P>
+	GLM_FUNC_DECL tvec3<T, P> YCoCgR2rgb(
+		tvec3<T, P> const & YCoCgColor);
 
 	/// @}
 }//namespace glm
 
-#include "integer.inl"
+#include "color_space_YCoCg.inl"
